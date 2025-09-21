@@ -1,8 +1,15 @@
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
+/**
+ * Backward-compatible smoke test retained at root level.
+ * Comprehensive tests live under src/__tests__.
+ */
+test('renders the Learn React link and theme toggle', () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  expect(screen.getByRole('link', { name: /learn react/i })).toBeInTheDocument();
+  // Button aria-label indicates next theme to switch to
+  expect(
+    screen.getByRole('button', { name: /switch to dark mode|switch to light mode/i })
+  ).toBeInTheDocument();
 });
